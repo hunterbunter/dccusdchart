@@ -1,0 +1,54 @@
+$def with (data, spotprice)
+<head>
+ <title>Devcoin/USD Chart</title>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+          google.load('visualization', '1', {packages: ['corechart']});
+        </script>
+        <script type="text/javascript">
+          function drawVisualization() {
+		var dataTable = new google.visualization.DataTable();
+		dataTable.addColumn('string', 'Time');
+		dataTable.addColumn('number', 'Low');
+		dataTable.addColumn('number', 'Open');
+		dataTable.addColumn('number', 'Close');
+		dataTable.addColumn('number', 'High');
+		dataTable.addColumn({type: 'string', role: 'tooltip'});
+
+		dataTable.addRows($:data)
+
+
+            var options = {
+                'title':'USD/DVC 15-min Chart - Value of 1 DVC in USD: $$$spotprice',
+                legend:'none',
+		series: [{color: 'grey', visibleInLegend: false}],
+		candlestick: {hollowIsRising: 'true', fallingColor: {fill: 'red', stroke: 'grey', strokeWidth: '0.2'}, risingColor: {fill: 'green', stroke: 'grey', strokeWidth: '0.2'}},
+		vAxes:{0: {titleTextStyle: {color: 'black'}, title:'USD'}}
+                };
+
+            var char = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+            char.draw(dataTable,options);
+          }
+
+          google.setOnLoadCallback(drawVisualization);
+        </script>
+</head>
+
+<body>
+<div id="container" style="width:1200px; margin:0 auto;">
+	<div>
+		<div id="chart_div" style="width: 1200px; height: 500px;"></div>		
+	</div>
+	<div>
+		<br /><br /><a href="http://dvccountdown.blisteringdevelopers.com">Devcoin Payment Block and Active Block Countdowns</a>
+	</div>
+	<div>
+		<br /><br />
+		<p>No ads, just love. And tips. <br /><br />
+		DVC: 1HUnznpv5nh91vEzbwvYud9ieeBCgzuscF<br />
+		BTC: 1BmUAAMSq95kfXspPpabgXAKnpkfjAScNC<br />
+		LTC: LPLjKsoSyCQgfkUb2eQQoz18QMqYRr75fN<br /><br />
+		</p>
+	</div>
+</div>
+</body>	
